@@ -37,7 +37,7 @@ const addBookHandler = (request, h) => {
     if (!name){
         const response = h.response ({
             status: 'fail',
-            message: 'Gagal menambahkan buku, Mohon isi nama buku'
+            message: 'Gagal menambahkan buku. Mohon isi nama buku'
         })
         response.code(400);
         return response;
@@ -144,4 +144,26 @@ const getAllBooksHandler = (request) => {
     };
 };
 
-module.exports = { getAllBooksHandler, addBookHandler };
+const getBookByIdHandler = (request, h) => {
+    const { bookId } = request.params;
+
+    const book = books.filter((b) => b.id === bookId)[0];
+
+    if (book !== undefined){
+        return {
+            status: 'success',
+            data: {
+                book,
+            }
+        }
+    }
+
+    const response = h.response({
+        status: 'fail',
+        message: 'Buku tidak ditemukan',
+    });
+    response.code(404);
+    return response;
+}
+
+module.exports = { getAllBooksHandler, addBookHandler, getBookByIdHandler };
