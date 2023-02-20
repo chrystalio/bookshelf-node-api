@@ -77,11 +77,71 @@ const addBookHandler = (request, h) => {
 
 }
 
-const getAllBookHandler = () => ({
-    status: "success",
-    data: {
-        books
-    },
-});
+const getAllBooksHandler = (request) => {
+    const keys = ['id', 'name', 'publisher'];
+    const {
+        name,
+        reading,
+        finished,
+    } = request.query;
 
-module.exports = { getAllBookHandler, addBookHandler };
+    if (name) {
+        const book = books.filter((b) => b.name.toLowerCase()
+            .includes(name.toLowerCase()))
+            .map(e => {
+                const obj = {};
+                keys.forEach(k => obj[k] = e[k]);
+                return obj;
+            });
+        return {
+            status: 'success',
+            data: {
+                books: book,
+            },
+        };
+    }
+    if (reading) {
+        const book = books.filter((b) => b.reading === !!parseInt(reading, 10))
+            .map(e => {
+                const obj = {};
+                keys.forEach(k => obj[k] = e[k]);
+                return obj;
+            });
+        return {
+            status: 'success',
+            data: {
+                books: book,
+            },
+        };
+    }
+    if (finished) {
+        const book = books.filter((b) => b.finished === !!parseInt(finished, 10))
+            .map(e => {
+                const obj = {};
+                keys.forEach(k => obj[k] = e[k]);
+                return obj;
+            });
+
+        return {
+            status: 'success',
+            data: {
+                books: book,
+            },
+        };
+    }
+
+    const books2 = books.map(e => {
+        const obj = {};
+        keys.forEach(k => obj[k] = e[k]);
+        return obj;
+    });
+
+    return {
+        status: 'success',
+        data: {
+            books: books2,
+        },
+    };
+};
+
+module.exports = { getAllBooksHandler, addBookHandler };
