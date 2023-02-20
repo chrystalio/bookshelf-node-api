@@ -84,4 +84,4 @@ const getAllBookHandler = () => ({
     },
 });
 
-module.exports = { getBookLists, addBookHandler };
+module.exports = { getAllBookHandler, addBookHandler };
