@@ -16,7 +16,7 @@ const addBookHandler = (request, h) => {
 
     const id = nanoid(16);
     const finished = pageCount === readPage;
-    const insertedAt =  new Date().toISOString();
+    const insertedAt = new Date().toISOString();
     const updatedAt = insertedAt;
 
     const newBook = {
@@ -34,8 +34,8 @@ const addBookHandler = (request, h) => {
         updatedAt,
     };
 
-    if (!name){
-        const response = h.response ({
+    if (!name) {
+        const response = h.response({
             status: 'fail',
             message: 'Gagal menambahkan buku. Mohon isi nama buku'
         })
@@ -43,7 +43,7 @@ const addBookHandler = (request, h) => {
         return response;
     }
 
-    if (readPage > pageCount){
+    if (readPage > pageCount) {
         const response = h.response({
             status: 'fail',
             message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount'
@@ -56,7 +56,7 @@ const addBookHandler = (request, h) => {
 
     const isSuccess = books.filter((book) => book.id === id).length > 0;
 
-    if (isSuccess){
+    if (isSuccess) {
         const response = h.response({
             status: 'success',
             message: 'Buku berhasil ditambahkan',
@@ -72,9 +72,6 @@ const addBookHandler = (request, h) => {
         status: 'error',
         message: 'Buku gagal ditambahkan'
     })
-
-
-
 }
 
 const getAllBooksHandler = (request) => {
@@ -145,11 +142,11 @@ const getAllBooksHandler = (request) => {
 };
 
 const getBookByIdHandler = (request, h) => {
-    const { bookId } = request.params;
+    const {bookId} = request.params;
 
     const book = books.filter((b) => b.id === bookId)[0];
 
-    if (book !== undefined){
+    if (book !== undefined) {
         return {
             status: 'success',
             data: {
@@ -166,4 +163,4 @@ const getBookByIdHandler = (request, h) => {
     return response;
 }
 
-module.exports = { getAllBooksHandler, addBookHandler, getBookByIdHandler };
+module.exports = {getAllBooksHandler, addBookHandler, getBookByIdHandler};
