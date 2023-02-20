@@ -1,7 +1,12 @@
+const {getBookLists} = require("./handler");
+
 const routes = [
     {
         method: 'GET',
         path: '/books',
-        handler: 'tes'
-    }
-]
+        handler: getBookLists,
+    },
+];
+
+
+module.exports = routes;
