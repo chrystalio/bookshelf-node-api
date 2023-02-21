@@ -83,7 +83,7 @@ const getAllBooksHandler = (request) => {
     } = request.query;
 
     if (name) {
-        const book = books.filter((b) => b.name.toLowerCase()
+        const book = books.filter((book) => book.name.toLowerCase()
             .includes(name.toLowerCase()))
             .map(e => {
                 const obj = {};
@@ -98,7 +98,7 @@ const getAllBooksHandler = (request) => {
         };
     }
     if (reading) {
-        const book = books.filter((b) => b.reading === !!parseInt(reading, 10))
+        const book = books.filter((book) => book.reading === !!parseInt(reading, 10))
             .map(e => {
                 const obj = {};
                 keys.forEach(k => obj[k] = e[k]);
@@ -112,7 +112,7 @@ const getAllBooksHandler = (request) => {
         };
     }
     if (finished) {
-        const book = books.filter((b) => b.finished === !!parseInt(finished, 10))
+        const book = books.filter((book) => book.finished === !!parseInt(finished, 10))
             .map(e => {
                 const obj = {};
                 keys.forEach(k => obj[k] = e[k]);
@@ -144,7 +144,7 @@ const getAllBooksHandler = (request) => {
 const getBookByIdHandler = (request, h) => {
     const {bookId} = request.params;
 
-    const book = books.filter((b) => b.id === bookId)[0];
+    const book = books.filter((book) => book.id === bookId)[0];
 
     if (book !== undefined) {
         return {
